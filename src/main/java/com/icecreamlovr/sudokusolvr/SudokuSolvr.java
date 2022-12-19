@@ -39,11 +39,11 @@ public class SudokuSolvr {
   // Verifies that the board size is 9x9.
   private static void checkBoardSize(int[][] board) {
     if (board.length != 9) {
-      throw new IllegalArgumentException("Size need to be equal to 9.");
+      throw new IllegalArgumentException("Size should be 9 * 9.");
     }
     for (int i = 0; i < 9; i++) {
       if (board[i].length != 9) {
-        throw new IllegalArgumentException("Size need to be equal to 9.");
+        throw new IllegalArgumentException("Size should be 9 * 9.");
       }
     }
   }
@@ -53,7 +53,7 @@ public class SudokuSolvr {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board.length; j++) {
         if (board[i][j] > 9 || board[i][j] < 0) {
-          throw new IllegalArgumentException("Input numbers need to be between 0 and 9.");
+          throw new IllegalArgumentException("Input numbers should be between 0 and 9.");
         }
       }
     }
