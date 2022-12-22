@@ -26,15 +26,16 @@ public class SudokuSolvr {
    * Given a sudoku input, attempt to solve it using DFS + backtracking.
    * If successful, return the solved board.
    */
-  public int[][] solveSudoku(int[][] board) {
+  public void solveSudoku(int[][] board) {
     checkBoardSize(board);
     checkNumberRange(board);
+    checkSudokuRules(board);
 
     List<Coords> solvingOrder = getSolvingOrder(board);
     solveRecur(board, solvingOrder, 0);
-
-    return board;
   }
+
+
 
   // Verifies that the board size is 9x9.
   private static void checkBoardSize(int[][] board) {
@@ -54,6 +55,53 @@ public class SudokuSolvr {
       for (int j = 0; j < board.length; j++) {
         if (board[i][j] > 9 || board[i][j] < 0) {
           throw new IllegalArgumentException("Input numbers should be between 0 and 9.");
+        }
+      }
+    }
+  }
+
+  // Verifies that the input board follows Sudoku rules (row/col/3x3).
+  private static void checkSudokuRules(int[][] board) {
+    // checks rows
+    for (int i = 0; i < board.length; i++) {
+      boolean[] hasNumber = new boolean[board.length];
+      for (int j = 0; j < board.length; j++) {
+        int boardNumber = board[i][j];
+        if (boardNumber != 0) {
+          if (hasNumber[boardNumber - 1]) {
+            throw new IllegalArgumentException("Input numbers didn't follow Sudoku rules.");
+          }
+          hasNumber[boardNumber - 1] = true;
+        }
+      }
+    }
+    // checks columns
+    for (int i = 0; i < board.length; i++) {
+      boolean[] hasNumber = new boolean[board.length];
+      for (int j = 0; j < board.length; j++) {
+        int boardNumber = board[j][i];
+        if (boardNumber != 0) {
+          if (hasNumber[boardNumber - 1]) {
+            throw new IllegalArgumentException("Input numbers didn't follow Sudoku rules.");
+          }
+          hasNumber[boardNumber - 1] = true;
+        }
+      }
+    }
+    // check 3x3 boxes
+    for (int k = 0; k < 3; k++) {
+      for (int l = 0; l < 3; l++) {
+        boolean[] hasNumber = new boolean[board.length];
+        for (int i = 0; i < 3; i++) {
+          for (int j = 0; j < 3; j++) {
+            int boardNumber = board[i + 3 * k][j + 3 * l];
+            if (boardNumber != 0) {
+              if (hasNumber[boardNumber - 1]) {
+                throw new IllegalArgumentException("Input numbers didn't follow Sudoku rules.");
+              }
+              hasNumber[boardNumber - 1] = true;
+            }
+          }
         }
       }
     }
