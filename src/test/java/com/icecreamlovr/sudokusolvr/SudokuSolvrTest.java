@@ -29,7 +29,8 @@ class SudokuSolvrTest {
             {2, 8, 7, 4, 1, 9, 6, 3, 5},
             {3, 4, 5, 2, 8, 6, 1, 7, 9}};
     SudokuSolvr board = new SudokuSolvr();
-    assertThat(board.solveSudoku(testInput)).isEqualTo(output);
+    board.solveSudoku(testInput);
+    assertThat(testInput).isEqualTo(output);
   }
 
   @Test
@@ -47,7 +48,6 @@ class SudokuSolvrTest {
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
             {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-
     IllegalArgumentException actualThrown1 = assertThrows(
             IllegalArgumentException.class, () -> board.solveSudoku(testInput1));
     assertThat(actualThrown1.getMessage()).isEqualTo("Size should be 9 * 9.");
@@ -90,9 +90,56 @@ class SudokuSolvrTest {
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, -7, -9}};
-
     IllegalArgumentException actualThrown4 = assertThrows(
             IllegalArgumentException.class, () -> board.solveSudoku(testInput4));
     assertThat(actualThrown4.getMessage()).isEqualTo("Input numbers should be between 0 and 9.");
   }
+
+  @Test
+  public void testSudokuSolvrValidateRules() {
+    SudokuSolvr board = new SudokuSolvr();
+
+    int[][] testInput1 = {
+            {5, 3, 5, 5, 7, 3, 2, 6, 1},
+            {6, 0, 0, 1, 9, 5, 0, 0, 0},
+            {0, 9, 8, 0, 0, 0, 0, 6, 0},
+            {8, 0, 0, 0, 6, 0, 0, 0, 3},
+            {4, 0, 0, 8, 0, 3, 0, 0, 1},
+            {7, 0, 0, 0, 2, 0, 0, 0, 6},
+            {0, 6, 0, 0, 0, 0, 2, 8, 0},
+            {0, 0, 0, 4, 1, 9, 0, 0, 5},
+            {0, 0, 0, 0, 8, 0, 0, 7, 9}};
+    IllegalArgumentException actualThrown1 = assertThrows(
+            IllegalArgumentException.class, () -> board.solveSudoku(testInput1));
+    assertThat(actualThrown1.getMessage()).isEqualTo("Input numbers didn't follow Sudoku rules.");
+
+    int[][] testInput2 = {
+            {5, 3, 0, 0, 7, 3, 2, 6, 1},
+            {6, 0, 0, 1, 9, 5, 0, 0, 0},
+            {0, 9, 8, 0, 0, 0, 0, 6, 0},
+            {8, 0, 0, 0, 6, 0, 0, 0, 3},
+            {4, 6, 0, 8, 0, 3, 0, 0, 1},
+            {7, 6, 0, 0, 2, 0, 0, 0, 0},
+            {0, 6, 0, 0, 0, 0, 2, 8, 0},
+            {0, 6, 0, 4, 1, 9, 0, 0, 5},
+            {0, 6, 0, 0, 8, 0, 0, 7, 9}};
+    IllegalArgumentException actualThrown2 = assertThrows(
+            IllegalArgumentException.class, () -> board.solveSudoku(testInput2));
+    assertThat(actualThrown2.getMessage()).isEqualTo("Input numbers didn't follow Sudoku rules.");
+
+    int[][] testInput3 = {
+            {5, 3, 0, 0, 7, 0, 0, 0, 0},
+            {6, 0, 0, 1, 9, 5, 0, 0, 0},
+            {0, 9, 8, 0, 0, 0, 0, 6, 0},
+            {8, 0, 0, 0, 6, 0, 0, 0, 3},
+            {4, 0, 0, 6, 0, 3, 0, 0, 1},
+            {7, 0, 0, 0, 2, 0, 0, 0, 6},
+            {0, 6, 0, 0, 0, 0, 2, 8, 0},
+            {0, 0, 0, 4, 1, 9, 0, 0, 5},
+            {0, 0, 0, 0, 8, 0, 0, 7, 9}};
+    IllegalArgumentException actualThrown3 = assertThrows(
+            IllegalArgumentException.class, () -> board.solveSudoku(testInput3));
+    assertThat(actualThrown3.getMessage()).isEqualTo("Input numbers didn't follow Sudoku rules.");
+  }
 }
+
