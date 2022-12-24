@@ -1,16 +1,11 @@
-package com.icecreamlovr.sudokusolvr;
+package com.icecreamlovr.sudokusolvr.solvr;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 
 public class SudokuSolvr {
 
-  private final int LENGTH = 9;
+  private final static int LENGTH = 9;
 
   private static class Coords {
     private int row;
@@ -27,25 +22,12 @@ public class SudokuSolvr {
     }
   }
 
-  public static void main(String[] args) throws ParseException {
-    System.out.println(">>>Hello world!");
-
-    Options options = new Options();
-    options.addOption("x", false, "random flag");
-
-    CommandLineParser parser = new DefaultParser();
-    CommandLine cmd = parser.parse(options, args);
-
-    if(cmd.hasOption("x")) {
-      System.out.println("Hi!");
-    }
-  }
 
   /**
    * Given a sudoku input, attempt to solve it using DFS + backtracking.
    * If successful, return the solved board.
    */
-  public void solveSudoku(int[][] board) {
+  public static void solveSudoku(int[][] board) {
     checkBoardSize(board);
     checkNumberRange(board);
     checkSudokuRules(board);
@@ -128,7 +110,7 @@ public class SudokuSolvr {
 
   // Get an ordered list of coordinates that need to be solved.
   // The algorithm will follow this order to solve the sudoku.
-  private List<Coords> getSolvingOrder(int[][] board) {
+  private static List<Coords> getSolvingOrder(int[][] board) {
     List<Coords> order = new ArrayList<>();
     for (int i = 0; i < LENGTH; i++) {
       for (int j = 0; j < LENGTH; j++) {
@@ -143,7 +125,7 @@ public class SudokuSolvr {
   // Recursively solves the sudoku using DFS + backtracking.
   // The algorithm will follow a specific order to determine what slot to solve next.
   // The recursive call returns false if it cannot move forward.
-  private boolean solveRecur(int[][] board, List<Coords> solvingOrder, int orderIndex) {
+  private static boolean solveRecur(int[][] board, List<Coords> solvingOrder, int orderIndex) {
     if (orderIndex == solvingOrder.size()) {
       // Base case: no more slot to solve.
       return true;
@@ -171,7 +153,7 @@ public class SudokuSolvr {
 
   // For a given unsolved slot, gets the list of potential numbers it can be.
   // This is done by going through the row, the column and the 3x3 square this slot is in.
-  private List<Integer> getGuesses(Coords boardSlot, int[][] board) {
+  private static List<Integer> getGuesses(Coords boardSlot, int[][] board) {
     // Create a boolean array for masking.
     boolean[] existingNumbers = new boolean[9];
     int row = boardSlot.row;

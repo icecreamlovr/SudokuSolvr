@@ -22,5 +22,5 @@ test {
 }
 
 application {
-    mainClassName = 'com.icecreamlovr.sudokusolvr.SudokuSolvr'
+    mainClassName = 'com.icecreamlovr.sudokusolvr.cli.SudokuSolvrCli'
 }
