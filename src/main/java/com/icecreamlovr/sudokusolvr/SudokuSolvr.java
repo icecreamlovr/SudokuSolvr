@@ -2,6 +2,11 @@ package com.icecreamlovr.sudokusolvr;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 public class SudokuSolvr {
 
@@ -19,6 +24,20 @@ public class SudokuSolvr {
     @Override
     public String toString() {
       return (row + "," + col);
+    }
+  }
+
+  public static void main(String[] args) throws ParseException {
+    System.out.println(">>>Hello world!");
+
+    Options options = new Options();
+    options.addOption("x", false, "random flag");
+
+    CommandLineParser parser = new DefaultParser();
+    CommandLine cmd = parser.parse(options, args);
+
+    if(cmd.hasOption("x")) {
+      System.out.println("Hi!");
     }
   }
 
