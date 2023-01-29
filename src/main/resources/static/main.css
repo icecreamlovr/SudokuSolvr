@@ -1,0 +1,22 @@
+table {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td, th {
+	border: 1px solid #999;
+	padding: 0.5rem;
+	text-align: center;
+	width: 2.8rem;
+	height: 2.8rem;
+}
+
+td.odd, th.odd {
+	background: grey
+}
+
+td.even, th.even {
+	background: white
+}
+
