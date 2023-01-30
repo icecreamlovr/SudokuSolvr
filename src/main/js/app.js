@@ -4,21 +4,19 @@ import ReactDOM from 'react-dom';
 class Tile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ""
-    };
   }
 
   handleInput = (event) => {
     event.preventDefault();
     const filteredValue = event.target.value.replace(/[^1-9]/g, '');
     if (filteredValue != "") {
-      // So that invalid inputs (e.g. alphabeticals) doesn't clear the tile
-      this.setState({ value: filteredValue });
+      // So that invalid inputs (e.g. alphabeticals) are not populated to
+      // parent which would clear the tile.
+      this.props.propagateValue(filteredValue);
     } else if (event.target.value == "") {
-      // So that delete (backspace) can clear the tile.
+      // So that delete (backspace) can be populated and clear the tile.
       // Note this checks the original input value, not the filtered one.
-      this.setState({ value: filteredValue });
+      this.props.propagateValue(filteredValue);
     }
   }
 
@@ -29,17 +27,28 @@ class Tile extends React.Component {
         type="text"
         maxLength="1"
         onInput={this.handleInput}
-        value={this.state.value} />
+        value={this.props.value} />
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value0: ""
+    };
+  }
+
+  handleTilePropagatesValue = (value) => {
+    this.setState({ value0: value });
+  }
+
   render() {
     return (
       <div>
         <div className="board-row">
-          <Tile value="7" />
+          <Tile value={this.state.value0} propagateValue={this.handleTilePropagatesValue} />
         </div>
       </div>
     );
