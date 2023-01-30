@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.0.1'
     id 'io.spring.dependency-management' version '1.1.0'
+    id 'com.github.node-gradle.node' version '3.5.1'
 }
 
 sourceCompatibility = '17'
@@ -31,3 +32,15 @@ test {
 //application {
 //    mainClassName = 'com.icecreamlovr.sudokusolvr.cli.SudokuSolvrCli'
 //}
+
+task buildReactApp(type: NodeTask, dependsOn: 'npmInstall') {
+    script = project.file('node_modules/webpack/bin/webpack.js')
+    args = [
+            '--mode', 'development',
+    ]
+}
+
+processResources.dependsOn 'buildReactApp'
+clean.delete << file('package-lock.json')
+clean.delete << file('node_modules')
+clean.delete << file('src/main/resources/static/built')
