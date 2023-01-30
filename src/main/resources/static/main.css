@@ -1,22 +1,19 @@
-table {
-	border-collapse: collapse;
-	margin-left: auto;
-	margin-right: auto;
+.board-row{
+  display: table;
+  margin: auto;
 }
 
-td, th {
-	border: 1px solid #999;
-	padding: 0.5rem;
-	text-align: center;
-	width: 2.8rem;
-	height: 2.8rem;
+.tile {
+  caret-color: transparent;
+  background: #fff;
+  border: 2px solid #999;
+  height: 4rem;
+  width: 4rem;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  font-size: 2.8rem;
+  font-weight: bold;
+  line-height: 150%;
+  text-align: center;
 }
-
-td.odd, th.odd {
-	background: grey
-}
-
-td.even, th.even {
-	background: white
-}
-
