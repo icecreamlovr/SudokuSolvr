@@ -19,6 +19,11 @@ gradlew
 gradlew.bat
 settings.gradle
 
+### Node.js ###
+node_modules/
+package-lock.json
+src/main/resources/static/built/
+
 ### Eclipse ###
 .apt_generated
 .classpath
