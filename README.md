@@ -1,4 +1,8 @@
-**I've moved the project to a private repository. Please contact me if you need help with anything.**
+## Notes
+The server is now hosted on [AWS](http://184.169.222.204:8080/).
+
+I've moved the project to a private repository. Please contact me if you need help with anything!
+
 # SudokuSolvr by Yue He
 
 ### To setup the server
