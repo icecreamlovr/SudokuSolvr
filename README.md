@@ -1,5 +1,5 @@
 ## Notes
-The server is now hosted on [AWS](http://184.169.222.204/).
+The server is now hosted on [AWS](http://184.169.222.204/sudoku).
 
 **I've moved the project to a private repository. Please contact me if you need help with anything.**
 
